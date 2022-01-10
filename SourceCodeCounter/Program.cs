@@ -47,7 +47,7 @@ static void PrintScanFileInfoMarkdownTable(IOrderedEnumerable<IGrouping<string?,
     foreach (var fileType in fileTypeGroups)
     {
         const int columnWidth = 12;
-        var key = fileType.Key is not null ? fileType.Key.ToString() : string.Empty;
+        var key = fileType.Key?.ToString() ?? string.Empty;
         StringBuilder stringBuilder = new();
         stringBuilder.Append('|');
         stringBuilder.Append(key.PadRight(columnWidth, ' '));
