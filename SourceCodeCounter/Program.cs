@@ -41,8 +41,8 @@ static List<ScanFileInfo> CountFilesAndLines(IEnumerable<string> files)
 
 static void PrintScanFileInfoMarkdownTable(IOrderedEnumerable<IGrouping<string?, ScanFileInfo>> fileTypeGroups)
 {
-    Console.WriteLine($"|Extension   |Line Count  |Size        |");
-    Console.WriteLine($"|------------|------------|------------|");
+    Console.WriteLine($"|Extension   |File Count  |Line Count  |Size        |");
+    Console.WriteLine($"|------------|------------|------------|------------|");
 
     foreach (var fileType in fileTypeGroups)
     {
@@ -53,6 +53,8 @@ static void PrintScanFileInfoMarkdownTable(IOrderedEnumerable<IGrouping<string?,
         stringBuilder.Append(key.PadRight(columnWidth, ' '));
         stringBuilder.Append('|');
         stringBuilder.Append(fileType.Count().ToString().PadRight(columnWidth, ' '));
+        stringBuilder.Append('|');
+        stringBuilder.Append(fileType.Sum(x => x.LineCount).ToString().PadRight(columnWidth, ' '));
         stringBuilder.Append('|');
         stringBuilder.Append(fileType.Sum(x => x.SizeInBytes).ToString().PadRight(columnWidth, ' '));
         stringBuilder.Append('|');
